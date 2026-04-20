@@ -15,6 +15,5 @@ com\accounting\sistemacontador\model\Client.class
 com\accounting\sistemacontador\controller\LogoutServlet.class
 com\accounting\sistemacontador\dao\CategoryDAO.class
 com\accounting\sistemacontador\dao\UserDAO.class
-tests\UserDAOTest.class
 com\accounting\sistemacontador\controller\DeleteTransactionServlet.class
 com\accounting\sistemacontador\controller\LoginServlet.class
