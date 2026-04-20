@@ -63,7 +63,7 @@
                                   <label class="col-form-label fw-bold">Fecha Inicial: </label>
                                 </div>
                                 <div class="col-auto">
-                                  <input type="date" name="startDate" value="${startDate}" class="form-control">
+                                    <input type="date" name="startDate" value="${startDate}" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                   <label class="col-form-label fw-bold">Fecha Final: </label>
                                 </div>
                                 <div class="col-auto">
-                                  <input type="date" name="endDate" value="${endDate}" class="form-control">
+                                  <input type="date" name="endDate" value="${endDate}" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -89,14 +89,14 @@
                     <div class="row mb-4">
 
                         <div class="col-md-4">
-                            <div class="report-card card-income shadow">
+                            <div class="report-card card-income shadow mb-3 mb-md-0">
                                 <h5>Ingresos</h5>
                                 <h3>S/. ${ingresos}</h3>
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <div class="report-card card-expense shadow">
+                            <div class="report-card card-expense shadow mb-3 mb-md-0">
                                 <h5>Gastos</h5>
                                 <h3>S/. ${gastos}</h3>
                             </div>
@@ -113,36 +113,37 @@
                     <div class="navbar py-2 mb-4"></div>       
 
                     <div class="row justify-content-around">
-                        <!--TABLA MOVIMIENTOS -->
                         <!-- GRÁFICO -->
                         <div class="col-md-3 chart-container mb-4">
                             <h5 class="mb-4">Ingresos vs Gastos</h5>
                             <canvas id="pieChart"></canvas>
                         </div>
+                        <!--TABLA MOVIMIENTOS -->
                         <div class="col-md-8 chart-container mb-4">
                             <h5 class="mb-3">Movimientos</h5>
-
-                            <table class="table table-hover align-middle">
-                                <thead>
-                                    <tr>
-                                        <th>Tipo</th>
-                                        <th>Monto</th>
-                                        <th>Fecha</th>
-                                        <th>Descripción</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <c:forEach var="m" items="${movements}">
+                            <div class="table-responsive-mobile">
+                                <table class="table table-hover align-middle">
+                                    <thead>
                                         <tr>
-                                            <td>${m.type}</td>
-                                            <td>${m.amount}</td>
-                                            <td>${m.transactionDate}</td>
-                                            <td>${m.description}</td>
+                                            <th>Tipo</th>
+                                            <th>Monto</th>
+                                            <th>Fecha</th>
+                                            <th>Descripción</th>
                                         </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
+                                    </thead>
+
+                                    <tbody>
+                                        <c:forEach var="m" items="${movements}">
+                                            <tr>
+                                                <td>${m.type}</td>
+                                                <td>${m.amount}</td>
+                                                <td>${m.transactionDate}</td>
+                                                <td>${m.description}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         
                     </div>

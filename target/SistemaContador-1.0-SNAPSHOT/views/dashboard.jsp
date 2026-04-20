@@ -52,20 +52,20 @@
                     <!-- CARDS -->
                     <div class="row mb-4">
                         <div class="col-md-4">
-                            <div class="card card-income p-3 shadow">
-                                <h5>Ingresos</h5>
+                            <div class="card card-income p-3 shadow mb-3 mb-md-0">
+                                <h5>Ingresos Totales</h5>
                                 <h3>S/. ${ingresos}</h3>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card card-expense p-3 shadow">
-                                <h5>Gastos</h5>
+                            <div class="card card-expense p-3 shadow mb-3 mb-md-0">
+                                <h5>Gastos Totales</h5>
                                 <h3>S/. ${gastos}</h3>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="card card-balance p-3 shadow">
-                                <h5>Balance</h5>
+                                <h5>Balance Total</h5>
                                 <h3>S/. ${balance}</h3>
                             </div>
                         </div>
@@ -76,28 +76,30 @@
                     <!-- TABLA -->
                     <div class="card p-3">
                         <h5>Últimos movimientos</h5>
-                        <table class="table table-hover align-middle">
-                            <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Tipo</th>
-                                    <th>Monto</th>
-                                    <th>Fecha</th>
-                                    <th>Descripción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach var="m" items="${ultimosMovimientos}">
+                        <div class="table-responsive-mobile">
+                            <table class="table table-hover align-middle">
+                                <thead>
                                     <tr>
-                                        <td><strong>${m.clientName}</strong></td>
-                                        <td>${m.type}</td>
-                                        <td>${m.amount}</td>
-                                        <td>${m.transactionDate}</td>
-                                        <td>${m.description}</td>
+                                        <th>Cliente</th>
+                                        <th>Tipo</th>
+                                        <th>Monto</th>
+                                        <th>Fecha</th>
+                                        <th>Descripción</th>
                                     </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="m" items="${ultimosMovimientos}">
+                                        <tr>
+                                            <td><strong>${m.clientName}</strong></td>
+                                            <td>${m.type}</td>
+                                            <td>${m.amount}</td>
+                                            <td>${m.transactionDate}</td>
+                                            <td>${m.description}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

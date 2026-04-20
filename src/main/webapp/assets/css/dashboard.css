@@ -141,6 +141,16 @@ body {
     display: block;
 }
 
+.toast {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.table-responsive-mobile {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
 @media (max-width: 768px) {
     .mobile-header {
         display: flex;
@@ -166,5 +176,14 @@ body {
 
     .main-content .page-header {
         display: none !important;
+    }
+    
+    .table-responsive-mobile {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive-mobile table {
+        min-width: 600px;
     }
 }

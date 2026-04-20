@@ -57,22 +57,22 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    <select name="documentType" class="form-control">
+                                    <select name="documentType" class="form-control" required>
                                         <option value="DNI">DNI</option>
                                         <option value="RUC">RUC</option>
                                     </select>
                                 </div>
                                 
                                 <div class="col-md-2">
-                                    <input name="documentNumber" class="form-control" placeholder="Número documento">
+                                    <input type="number" name="documentNumber" class="form-control" placeholder="Número documento" required>
                                 </div>
 
                                 <div class="col-md-2">
-                                    <input name="phone" class="form-control" placeholder="Teléfono">
+                                    <input type="number" name="phone" class="form-control" placeholder="Teléfono" required>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <input name="email" class="form-control" placeholder="Correo electrónico">
+                                    <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required>
                                 </div>
 
                                 <div class="col-md-4">
@@ -80,7 +80,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input name="address" class="form-control" placeholder="Dirección">
+                                    <input name="address" class="form-control" placeholder="Dirección" required>
                                 </div>
 
                                 <div class="col-md-2">
@@ -95,56 +95,56 @@
                         <h5 class="mb-3">Listado de Clientes</h5>
 
                         <div class="table-responsive-mobile">
-                        <table class="table table-hover align-middle">
+                            <table class="table table-hover align-middle">
 
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Documento</th>
-                                    <th>Empresa</th>
-                                    <th>Email</th>
-                                    <th>Teléfono</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                                <c:forEach var="c" items="${clients}">
+                                <thead class="table-light">
                                     <tr>
-                                        <td><strong>${c.fullName}</strong></td>
-                                        <td>${c.documentType} - ${c.documentNumber}</td>
-                                        <td>${c.companyName}</td>
-                                        <td>${c.email}</td>
-                                        <td>${c.phone}</td>
-                                        <td>
-                                            <button class="btn btn-warning btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#editModal"
-                                                    onclick="loadClientData(
-                                                        ${c.clientId},
-                                                        '${c.fullName}',
-                                                        '${c.documentType}',
-                                                        '${c.documentNumber}',
-                                                        '${c.email}',
-                                                        '${c.phone}',
-                                                        '${c.address}',
-                                                        '${c.companyName}'
-                                                    )">
-                                                Editar
-                                            </button>
-
-                                            <button class="btn btn-danger btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal"
-                                                    onclick="setDeleteId(${c.clientId})">
-                                                Eliminar
-                                            </button>
-                                        </td>
+                                        <th>Nombre</th>
+                                        <th>Documento</th>
+                                        <th>Empresa</th>
+                                        <th>Email</th>
+                                        <th>Teléfono</th>
+                                        <th>Acciones</th>
                                     </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                                </thead>
+
+                                <tbody>
+
+                                    <c:forEach var="c" items="${clients}">
+                                        <tr>
+                                            <td><strong>${c.fullName}</strong></td>
+                                            <td>${c.documentType} - ${c.documentNumber}</td>
+                                            <td>${c.companyName}</td>
+                                            <td>${c.email}</td>
+                                            <td>${c.phone}</td>
+                                            <td>
+                                                <button class="btn btn-warning btn-sm"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editModal"
+                                                        onclick="loadClientData(
+                                                            ${c.clientId},
+                                                            '${c.fullName}',
+                                                            '${c.documentType}',
+                                                            '${c.documentNumber}',
+                                                            '${c.email}',
+                                                            '${c.phone}',
+                                                            '${c.address}',
+                                                            '${c.companyName}'
+                                                        )">
+                                                    Editar
+                                                </button>
+
+                                                <button class="btn btn-danger btn-sm"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal"
+                                                        onclick="setDeleteId(${c.clientId})">
+                                                    Eliminar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -172,34 +172,34 @@
                             <div class="row g-2">
 
                                 <div class="col-md-4">
-                                    <input id="editFullName" name="fullName" class="form-control" placeholder="Nombre completo">
+                                    <input id="editFullName" name="fullName" class="form-control" placeholder="Nombre completo" required="true">
                                 </div>
 
                                 <div class="col-md-2">
-                                    <select id="editDocumentType" name="documentType" class="form-control">
+                                    <select id="editDocumentType" name="documentType" class="form-control" required="true">
                                         <option value="DNI">DNI</option>
                                         <option value="RUC">RUC</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <input id="editDocumentNumber" name="documentNumber" class="form-control">
+                                    <input type="number" id="editDocumentNumber" name="documentNumber" class="form-control" required="true">
                                 </div>
 
                                 <div class="col-md-3">
-                                    <input id="editPhone" name="phone" class="form-control">
+                                    <input type="number" id="editPhone" name="phone" class="form-control" required="true">
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input id="editEmail" name="email" class="form-control">
+                                    <input type="email" id="editEmail" name="email" class="form-control" required="true">
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input id="editCompanyName" name="companyName" class="form-control">
+                                    <input id="editCompanyName" name="companyName" class="form-control" placeholder="Empresa(Opcional)">
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input id="editAddress" name="address" class="form-control">
+                                    <input id="editAddress" name="address" class="form-control" required="true">
                                 </div>
 
                             </div>
@@ -243,7 +243,7 @@
                 </div>
             </div>
         </div>
-
+        
         <script>
             function setDeleteId(id) {
                 const btn = document.getElementById("confirmDeleteBtn");
@@ -269,5 +269,25 @@
         }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- NOTIFICACION PARA MOSTRAR MENSAJE DE ERROR -->
+        <c:if test="${not empty error}">
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="errorToast" class="toast align-items-center text-white bg-danger border-0">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            ${error}
+                        </div>
+
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            </div>
+            <script>
+                const toast = new bootstrap.Toast(document.getElementById('errorToast'));
+                toast.show();
+            </script>
+        </c:if>
     </body>
 </html>

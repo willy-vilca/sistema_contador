@@ -48,7 +48,7 @@
                         <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label fw-bold ms-1">Seleccione un Cliente:</label>
                             <div class="col-sm-10">
-                                <select name="clientId" onchange="this.form.submit()" class="form-control w-25 mb-3">
+                                <select name="clientId" onchange="this.form.submit()" class="form-control w-auto mb-3">
                                     <c:forEach var="c" items="${clients}">
                                         <option value="${c.clientId}" ${c.clientId == selectedClient ? 'selected' : ''}>
                                             ${c.fullName}
@@ -62,13 +62,13 @@
                     <!-- BALANCE DEL CLIENTE -->    
                     <div class="row mb-4">
                         <div class="col-md-4">
-                            <div class="summary-card card-income shadow">
+                            <div class="summary-card card-income shadow mb-3 mb-md-0">
                                 <h5>Ingresos</h5>
                                 <h3>S/. ${ingresos}</h3>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="summary-card card-expense shadow">
+                            <div class="summary-card card-expense shadow mb-3 mb-md-0">
                                 <h5>Gastos</h5>
                                 <h3>S/. ${gastos}</h3>
                             </div>
@@ -96,7 +96,7 @@
                             </div>
 
                             <div class="col-md-2">
-                                <input name="amount" class="form-control" placeholder="Monto" required="true">
+                                <input type="number" step="0.5" min="0.5" name="amount" class="form-control" placeholder="Monto" required="true">
                             </div>
 
                             <div class="col-md-3">
@@ -234,7 +234,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <input id="editAmount" name="amount" class="form-control">
+                                    <input type="number" step="0.5" min="0.5" id="editAmount" name="amount" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-3">
@@ -248,11 +248,11 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <input type="date" id="editDate" name="date" class="form-control">
+                                    <input type="date" id="editDate" name="date" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <input id="editDescription" name="description" class="form-control" placeholder="Descripción">
+                                    <input id="editDescription" name="description" class="form-control" placeholder="Descripción" required>
                                 </div>
 
                             </div>

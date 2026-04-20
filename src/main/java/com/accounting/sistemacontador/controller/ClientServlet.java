@@ -40,6 +40,37 @@ public class ClientServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         
         String action = request.getParameter("action");
+        
+        //validación del número de teléfono
+        String telefono = request.getParameter("phone");
+        if (telefono != null && !telefono.matches("\\d{9}")) {
+            //si el campo no es valido se retorna a la pagína y se envia un mensaje de error
+            request.setAttribute("error", "El número de teléfono debe tener exactamente 9 dígitos");
+            List<Client> clients = dao.getClientsByUser(user.getUserId());
+            request.setAttribute("clients", clients);
+            request.getRequestDispatcher("views/clients.jsp").forward(request, response);
+            return;
+        }
+        
+        //validación del número de documento
+        String tipoDoc = request.getParameter("documentType");
+        String numDoc = request.getParameter("documentNumber");
+        if ("DNI".equals(tipoDoc) && !numDoc.matches("\\d{8}")) {
+            //si el campo no es valido se retorna a la pagína y se envia un mensaje de error
+            request.setAttribute("error", "El número del DNI debe tener exactamente 8 dígitos");
+            List<Client> clients = dao.getClientsByUser(user.getUserId());
+            request.setAttribute("clients", clients);
+            request.getRequestDispatcher("views/clients.jsp").forward(request, response);
+            return;
+        }
+        if ("RUC".equals(tipoDoc) && !numDoc.matches("\\d{11}")) {
+            //si el campo no es valido se retorna a la pagína y se envia un mensaje de error
+            request.setAttribute("error", "El número del RUC debe tener exactamente 11 dígitos");
+            List<Client> clients = dao.getClientsByUser(user.getUserId());
+            request.setAttribute("clients", clients);
+            request.getRequestDispatcher("views/clients.jsp").forward(request, response);
+            return;
+        }
 
         Client c = new Client();
         c.setUserId(user.getUserId());
