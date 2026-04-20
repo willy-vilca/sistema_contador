@@ -268,28 +268,7 @@
             </div>
         </div>
 
-        <script>
-        function setDeleteMovement(id, clientId) {
-            const btn = document.getElementById("confirmDeleteMovement");
-            btn.href = "<%= request.getContextPath() %>/deleteMovement?id=" + id + "&clientId=" + clientId;
-        }
-
-        function loadMovementData(id, type, amount, date, description, categoryId) {
-
-            document.getElementById("editId").value = id;
-            document.getElementById("editType").value = type;
-            document.getElementById("editAmount").value = amount;
-            document.getElementById("editDate").value = date;
-            document.getElementById("editDescription").value = description;
-            document.getElementById("editCategory").value = categoryId;
-        }
-        </script>
-        <script>
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            document.querySelector('.sidebar-overlay').classList.toggle('active');
-        }
-        </script>
+        <script src="<%= request.getContextPath() %>/assets/js/movements.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

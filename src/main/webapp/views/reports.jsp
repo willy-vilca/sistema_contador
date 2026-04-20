@@ -185,48 +185,48 @@
             </div>
         </div>                
         <script>
+            //Funcion para agregar los datos a los gráficos
+            new Chart(document.getElementById("pieChart"), {
+                type: 'pie',
+                data: {
+                    labels: ['Ingresos', 'Gastos'],
+                    datasets: [{
+                        data: [${ingresos}, ${gastos}],
+                        backgroundColor: ['#28a745', '#dc3545']
+                    }]
+                }
+            });
 
-        new Chart(document.getElementById("pieChart"), {
-            type: 'pie',
-            data: {
-                labels: ['Ingresos', 'Gastos'],
-                datasets: [{
-                    data: [${ingresos}, ${gastos}],
-                    backgroundColor: ['#28a745', '#dc3545']
-                }]
-            }
-        });
+            const labels = [
+                <c:forEach var="entry" items="${categories}">
+                    '${entry.key}',
+                </c:forEach>
+            ];
 
-        const labels = [
-            <c:forEach var="entry" items="${categories}">
-                '${entry.key}',
-            </c:forEach>
-        ];
+            const data = [
+                <c:forEach var="entry" items="${categories}">
+                    ${entry.value},
+                </c:forEach>
+            ];
 
-        const data = [
-            <c:forEach var="entry" items="${categories}">
-                ${entry.value},
-            </c:forEach>
-        ];
-
-        new Chart(document.getElementById("barChart"), {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Total',
-                    data: data
-                }]
-            }
-        });
+            new Chart(document.getElementById("barChart"), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total',
+                        data: data
+                    }]
+                }
+            });
 
         </script>
-
         <script>
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            document.querySelector('.sidebar-overlay').classList.toggle('active');
-        }
+            //funcionalidad del menú hamburguesa
+            function toggleSidebar() {
+                document.querySelector('.sidebar').classList.toggle('active');
+                document.querySelector('.sidebar-overlay').classList.toggle('active');
+            }
         </script>
     </body>
 </html>

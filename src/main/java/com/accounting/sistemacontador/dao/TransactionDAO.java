@@ -47,7 +47,7 @@ public class TransactionDAO {
         String sql = "select c.full_name as nameClient, t.type, t.amount, t.transaction_date, t.description from transactions as t " +
                      "inner join clients as c on t.client_id = c.client_id " +
                      "inner join users as u on c.user_id = u.user_id " +
-                     "where u.user_id = ? order by t.transaction_date desc limit 10";
+                     "where u.user_id = ? AND c.status = true order by t.transaction_date desc limit 10";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -117,6 +117,40 @@ public class TransactionDAO {
                     gastos = total;
                 }
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new double[]{ingresos, gastos, ingresos - gastos};
+    }
+    
+    public double[] getSummaryByUser(int userId) {
+
+        double ingresos = 0;
+        double gastos = 0;
+
+        // Total ingresos del usuario
+        String ingresosSql = "SELECT COALESCE(SUM(amount),0) FROM transactions t " +
+                "JOIN clients c ON t.client_id = c.client_id " +
+                "WHERE t.type = 'INGRESO' AND c.status = true AND c.user_id = ?";
+
+        // Total gastos del usuario
+        String gastosSql = "SELECT COALESCE(SUM(amount),0) FROM transactions t " +
+                "JOIN clients c ON t.client_id = c.client_id " +
+                "WHERE t.type = 'GASTO' AND c.status = true AND c.user_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps1 = conn.prepareStatement(ingresosSql);
+             PreparedStatement ps2 = conn.prepareStatement(gastosSql)) {
+
+            ps1.setInt(1, userId);
+            ps2.setInt(1, userId);
+            ResultSet rs1 = ps1.executeQuery();
+            ResultSet rs2 = ps2.executeQuery();
+
+            if (rs1.next()) ingresos = rs1.getDouble(1);
+            if (rs2.next()) gastos = rs2.getDouble(1);
 
         } catch (Exception e) {
             e.printStackTrace();

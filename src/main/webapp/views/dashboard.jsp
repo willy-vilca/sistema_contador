@@ -106,10 +106,10 @@
         </div>
 
         <script>
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            document.querySelector('.sidebar-overlay').classList.toggle('active');
-        }
+            function toggleSidebar() {
+                document.querySelector('.sidebar').classList.toggle('active');
+                document.querySelector('.sidebar-overlay').classList.toggle('active');
+            }
         </script>
     </body>
 </html>

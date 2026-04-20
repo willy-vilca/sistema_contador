@@ -242,32 +242,8 @@
 
                 </div>
             </div>
-        </div>
-        
-        <script>
-            function setDeleteId(id) {
-                const btn = document.getElementById("confirmDeleteBtn");
-                btn.href = "<%= request.getContextPath() %>/deleteClient?id=" + id;
-            }
-
-            function loadClientData(id, name, docType, docNum, email, phone, address, company) {
-
-                document.getElementById("editClientId").value = id;
-                document.getElementById("editFullName").value = name;
-                document.getElementById("editDocumentType").value = docType;
-                document.getElementById("editDocumentNumber").value = docNum;
-                document.getElementById("editEmail").value = email;
-                document.getElementById("editPhone").value = phone;
-                document.getElementById("editAddress").value = address;
-                document.getElementById("editCompanyName").value = company;
-            }
-        </script>
-        <script>
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            document.querySelector('.sidebar-overlay').classList.toggle('active');
-        }
-        </script>
+        </div>       
+        <script src="<%= request.getContextPath() %>/assets/js/clients.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         
         <!-- NOTIFICACION PARA MOSTRAR MENSAJE DE ERROR -->
