@@ -1,0 +1,33 @@
+.summary-card {
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    transition: 0.3s;
+}
+
+.summary-card:hover {
+    transform: scale(1.03) translateY(-5px);
+}
+
+.card-income {
+    background: #28a745;
+}
+
+.card-expense {
+    background: #dc3545;
+}
+
+.card-balance {
+    background: #4ca1af;
+}
+
+@media (max-width: 768px) {
+    .table-responsive-mobile {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive-mobile table {
+        min-width: 650px;
+    }
+}

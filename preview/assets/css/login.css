@@ -1,0 +1,52 @@
+body {
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    height: 100vh;
+}
+
+.login-container {
+    height: 100vh;
+}
+
+.login-card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.left-panel {
+    background: #1f2d3d;
+    color: white;
+    padding: 40px;
+}
+
+.left-panel h2 {
+    font-weight: bold;
+}
+
+.left-panel p {
+    opacity: 0.8;
+}
+
+.form-control {
+    border-radius: 10px;
+    background-color: #f1f3f5;
+    border: none;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 5px rgba(76, 161, 175, 0.8);
+    background-color: #ffffff;
+}
+
+.btn-primary {
+    background-color: #4ca1af;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #3b8d99;
+}
+
+.welcome-icon {
+    font-size: 50px;
+}

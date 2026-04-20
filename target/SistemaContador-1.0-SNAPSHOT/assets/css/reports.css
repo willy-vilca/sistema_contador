@@ -1,0 +1,25 @@
+.report-card {
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    transition: 0.3s;
+}
+
+.report-card:hover {
+    transform: scale(1.03) translateY(-5px);
+}
+
+.card-income { background: #28a745; }
+.card-expense { background: #dc3545; }
+.card-balance { background: #4ca1af; }
+
+.chart-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+#pieChart{
+    height: 350px;
+}
+
