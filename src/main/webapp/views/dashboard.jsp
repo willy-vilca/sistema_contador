@@ -80,8 +80,8 @@
                             <table class="table table-hover align-middle">
                                 <thead>
                                     <tr>
-                                        <th>Cliente</th>
                                         <th>Tipo</th>
+                                        <th>Cliente</th>
                                         <th>Monto</th>
                                         <th>Fecha</th>
                                         <th>Descripción</th>
@@ -90,8 +90,13 @@
                                 <tbody>
                                     <c:forEach var="m" items="${ultimosMovimientos}">
                                         <tr>
+                                            <td>
+                                                <span class="badge 
+                                                    ${m.type == 'INGRESO' ? 'bg-success' : 'bg-danger'}">
+                                                    ${m.type}
+                                                </span>
+                                            </td>
                                             <td><strong>${m.clientName}</strong></td>
-                                            <td>${m.type}</td>
                                             <td>${m.amount}</td>
                                             <td>${m.transactionDate}</td>
                                             <td>${m.description}</td>

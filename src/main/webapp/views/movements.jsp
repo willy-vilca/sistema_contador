@@ -7,6 +7,7 @@
         <title>Movimientos</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/dashboard.css">
         <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/movements.css">
     </head>
@@ -100,13 +101,19 @@
                             </div>
 
                             <div class="col-md-3">
-                                <select name="categoryId" class="form-control" required="true">
-                                    <c:forEach var="cat" items="${categories}">
-                                        <option value="${cat.categoryId}">
-                                            ${cat.name}
-                                        </option>
-                                    </c:forEach>
-                                </select>
+                                <div class="input-group">
+                                    <select name="categoryId" class="form-control" required>
+                                        <c:forEach var="cat" items="${categories}">
+                                            <option value="${cat.categoryId}">
+                                                ${cat.name}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                    <!-- BOTÓN PARA AGREGAR CATEGORIAS -->
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#categoryModal" title="Gestionar Categorías">
+                                        +
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="col-md-2">
@@ -123,6 +130,35 @@
 
                         </form>
                     </div>   
+                    
+                    <!-- FILTRO DE MOVIMIENTOS -->       
+                    <div class="card p-3 mb-3 shadow-sm">
+                        <h5 class="mb-3">Filtrar Movimientos</h5>
+                        <div class="row g-2">
+                            <!-- FILTRO TIPO -->
+                            <div class="col-md-3">
+                                <label>Tipo</label>
+                                <select id="filterType" class="form-control">
+                                    <option value="ALL">Todos</option>
+                                    <option value="INGRESO">Ingresos</option>
+                                    <option value="GASTO">Gastos</option>
+                                </select>
+                            </div>
+                            <!-- FILTRO CATEGORÍA -->
+                            <div class="col-md-4">
+                                <label>Categoría</label>
+                                <select id="filterCategory" class="form-control">
+                                    <option value="ALL">Todas</option>
+
+                                    <c:forEach var="cat" items="${categories}">
+                                        <option value="${cat.categoryId}">
+                                            ${cat.name}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <!-- TABLA -->
                     <div class="table-responsive-mobile">
                     <table class="table table-hover align-middle">
@@ -139,8 +175,13 @@
 
                         <tbody>
                             <c:forEach var="m" items="${movements}">
-                                <tr>
-                                    <td>${m.type}</td>
+                                <tr class="movement-row" data-type="${m.type}" data-category="${m.categoryId}">
+                                    <td>
+                                        <span class="badge 
+                                            ${m.type == 'INGRESO' ? 'bg-success' : 'bg-danger'}">
+                                            ${m.type}
+                                        </span>
+                                    </td>
                                     <td>${m.amount}</td>
                                     <td>${m.transactionDate}</td>
                                     <td>${m.description}</td>
@@ -267,6 +308,241 @@
                 </div>
             </div>
         </div>
+                            
+        <!-- MODAL NUEVA CATEGORÍA -->
+        <div class="modal fade" id="categoryModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">Nueva Categoría</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form action="<%= request.getContextPath() %>/categories" method="post">
+                        <input type="hidden" name="action" value="create">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label>Nombre</label>
+                                <input type="text" name="name" class="form-control" placeholder="Nombre de la nueva categoría..." required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Tipo</label>
+                                <select name="type" class="form-control">
+                                    <option value="INGRESO">INGRESO</option>
+                                    <option value="GASTO">GASTO</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label>Descripción</label>
+                                <input type="text" name="description" class="form-control" placeholder="(Opcional)">
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between">
+                            <!-- BOTÓN GESTIONAR CATEGORIAS -->
+                            <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#manageCategoryModal">
+                                Gestionar categorías
+                            </button>
+                            <div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MODAL GESTIONAR CATEGORIAS -->
+        <div class="modal fade" id="manageCategoryModal" tabindex="-1">
+
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                <div class="modal-content">
+
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title">Gestionar Categorías</h5>
+                        <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="table-responsive-mobile">
+
+                            <table class="table table-hover align-middle">
+
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Tipo</th>
+                                        <th>Descripción</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <c:forEach var="cat" items="${categories}">
+
+                                        <tr>
+                                            <td>${cat.name}</td>
+                                            <td>
+                                                <span class="badge 
+                                                    ${cat.type == 'INGRESO' ? 'bg-success' : 'bg-danger'}">
+                                                    ${cat.type}
+                                                </span>
+                                            </td>
+                                            <td>${cat.description}</td>
+
+                                            <td class="text-center">
+
+                                                <!-- EDITAR -->
+                                                <button class="btn btn-sm btn-warning"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editCategoryModal${cat.categoryId}">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+
+                                                <!-- ELIMINAR -->
+                                                <button class="btn btn-sm btn-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteCategoryModal${cat.categoryId}">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MODAL EDITAR CATEGORIAS -->
+        <c:forEach var="cat" items="${categories}">
+
+            <div class="modal fade" id="editCategoryModal${cat.categoryId}" tabindex="-1">
+
+                <div class="modal-dialog modal-dialog-centered">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header bg-warning">
+                            <h5 class="modal-title">Editar Categoría</h5>
+                            <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <form action="<%= request.getContextPath() %>/categories" method="post">
+
+                            <input type="hidden" name="action" value="update">
+                            <input type="hidden" name="categoryId" value="${cat.categoryId}">
+
+                            <div class="modal-body">
+
+                                <div class="mb-3">
+                                    <label>Nombre</label>
+                                    <input type="text" name="name" value="${cat.name}" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label>Tipo</label>
+                                    <select name="type" class="form-control">
+                                        <option value="INGRESO" ${cat.type == 'INGRESO' ? 'selected' : ''}>Ingreso</option>
+                                        <option value="GASTO" ${cat.type == 'GASTO' ? 'selected' : ''}>Gasto</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label>Descripción</label>
+                                    <input type="text" name="description" value="${cat.description}" class="form-control">
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-warning">Guardar cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+        
+        <!-- MODAL ELIMINAR CATEGORIAS -->
+        <c:forEach var="cat" items="${categories}">
+
+            <div class="modal fade" id="deleteCategoryModal${cat.categoryId}" tabindex="-1">
+
+                <div class="modal-dialog modal-dialog-centered">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header bg-danger text-white">
+                            <h5 class="modal-title">Eliminar Categoría</h5>
+                            <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body text-center">
+
+                            <p>¿Seguro que deseas eliminar esta categoría?</p>
+                            <strong>${cat.name}</strong>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+                            <a href="<%= request.getContextPath() %>/categories?action=delete&id=${cat.categoryId}"
+                               class="btn btn-danger">
+                                Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const typeFilter = document.getElementById("filterType");
+                const categoryFilter = document.getElementById("filterCategory");
+                const rows = document.querySelectorAll(".movement-row");
+
+                function filterMovements() {
+                    const selectedType = typeFilter.value;
+                    const selectedCategory = categoryFilter.value;
+
+                    rows.forEach(row => {
+                        const rowType = row.getAttribute("data-type");
+                        const rowCategory = row.getAttribute("data-category");
+                        let show = true;
+                        
+                        // FILTRO TIPO
+                        if (selectedType !== "ALL" && rowType !== selectedType) {
+                            show = false;
+                        }
+                        // FILTRO CATEGORÍA
+                        if (selectedCategory !== "ALL" && rowCategory !== selectedCategory) {
+                            show = false;
+                        }
+                        // MOSTRAR / OCULTAR
+                        row.style.display = show ? "" : "none";
+                    });
+                }
+
+                // EVENTOS
+                typeFilter.addEventListener("change", filterMovements);
+                categoryFilter.addEventListener("change", filterMovements);
+            });
+        </script>
 
         <script src="<%= request.getContextPath() %>/assets/js/movements.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

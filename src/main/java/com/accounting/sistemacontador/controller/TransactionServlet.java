@@ -45,7 +45,7 @@ public class TransactionServlet extends HttpServlet {
         }
 
         List<Transaction> movements = transactionDAO.getByClient(clientId);
-        List<Category> categories = categoryDAO.getAll();
+        List<Category> categories = categoryDAO.getCategoriesByUser(user.getUserId());
 
         request.setAttribute("clients", clients);
         request.setAttribute("movements", movements);

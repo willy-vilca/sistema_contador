@@ -135,7 +135,12 @@
                                     <tbody>
                                         <c:forEach var="m" items="${movements}">
                                             <tr>
-                                                <td>${m.type}</td>
+                                                <td>
+                                                    <span class="badge 
+                                                        ${m.type == 'INGRESO' ? 'bg-success' : 'bg-danger'}">
+                                                        ${m.type}
+                                                    </span>
+                                                </td>
                                                 <td>${m.amount}</td>
                                                 <td>${m.transactionDate}</td>
                                                 <td>${m.description}</td>

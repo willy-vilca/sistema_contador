@@ -21,6 +21,17 @@
     background: #4ca1af;
 }
 
+.input-group .btn {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+#filterType, #filterCategory {
+    border-radius: 10px;
+    background-color: #f1f3f5;
+}
+
 @media (max-width: 768px) {
     .table-responsive-mobile {
         overflow-x: auto;
