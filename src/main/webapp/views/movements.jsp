@@ -49,7 +49,7 @@
                         <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label fw-bold ms-1">Seleccione un Cliente:</label>
                             <div class="col-sm-10">
-                                <select name="clientId" onchange="this.form.submit()" class="form-control w-auto mb-3">
+                                <select name="clientId" onchange="this.form.submit()" class="form-control w-auto mb-3 border border-dark-subtle">
                                     <c:forEach var="c" items="${clients}">
                                         <option value="${c.clientId}" ${c.clientId == selectedClient ? 'selected' : ''}>
                                             ${c.fullName}
@@ -90,19 +90,19 @@
                             <input type="hidden" name="clientId" value="${selectedClient}">
 
                             <div class="col-md-2">
-                                <select name="type" class="form-control">
+                                <select name="type" class="form-control border border-dark-subtle">
                                     <option value="INGRESO">Ingreso</option>
                                     <option value="GASTO">Gasto</option>
                                 </select>
                             </div>
 
                             <div class="col-md-2">
-                                <input type="number" step="0.5" min="0.5" name="amount" class="form-control" placeholder="Monto" required="true">
+                                <input type="number" step="0.5" min="0.5" name="amount" class="form-control border border-dark-subtle" placeholder="Monto" required="true">
                             </div>
 
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <select name="categoryId" class="form-control" required>
+                                    <select name="categoryId" class="form-control border border-dark-subtle" required>
                                         <c:forEach var="cat" items="${categories}">
                                             <option value="${cat.categoryId}">
                                                 ${cat.name}
@@ -117,11 +117,11 @@
                             </div>
 
                             <div class="col-md-2">
-                                <input type="date" name="date" class="form-control" required="true">
+                                <input type="date" name="date" class="form-control border border-dark-subtle" required="true">
                             </div>
 
                             <div class="col-md-3">
-                                <input name="description" class="form-control" placeholder="Descripción" required="true">
+                                <input name="description" class="form-control border border-dark-subtle" placeholder="Descripción" required="true">
                             </div>
 
                             <div class="col-md-2 mt-3">
@@ -136,18 +136,18 @@
                         <h5 class="mb-3">Filtrar Movimientos</h5>
                         <div class="row g-2">
                             <!-- FILTRO TIPO -->
-                            <div class="col-md-3">
-                                <label>Tipo</label>
-                                <select id="filterType" class="form-control">
+                            <div class="col-md-2 me-5">
+                                <label class="fw-bold">Por Tipo:</label>
+                                <select id="filterType" class="form-control border border-dark-subtle">
                                     <option value="ALL">Todos</option>
                                     <option value="INGRESO">Ingresos</option>
                                     <option value="GASTO">Gastos</option>
                                 </select>
                             </div>
                             <!-- FILTRO CATEGORÍA -->
-                            <div class="col-md-4">
-                                <label>Categoría</label>
-                                <select id="filterCategory" class="form-control">
+                            <div class="col-md-2">
+                                <label class="fw-bold">Por Categoría:</label>
+                                <select id="filterCategory" class="form-control border border-dark-subtle">
                                     <option value="ALL">Todas</option>
 
                                     <c:forEach var="cat" items="${categories}">
